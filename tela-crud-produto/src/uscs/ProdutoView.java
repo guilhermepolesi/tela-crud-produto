@@ -204,12 +204,28 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
                     Produto produto = iterator.next();
                      if (produto.getId() == Integer.parseInt(buscaProdutoText.getText())) {
                         iterator.remove(); // Remove o elemento de maneira segura
-            }
-                    
+                    }       
+                }
+                tableModel = (DefaultTableModel) tableBuscaProdutos.getModel();
+                tableModel.setNumRows(0);
+        }
+        else if (opcao == JOptionPane.NO_OPTION) {
+            tableModel = (DefaultTableModel) tableBuscaProdutos.getModel();
+            tableModel.setNumRows(0);
+            for (Produto produto : produtoController.getList()) {
+                if(Integer.parseInt(buscaProdutoText.getText()) == produto.getId()) {
+                    tableModel.addRow(new Object[]{
+                    produto.getId(),
+                    produto.getNome(),
+                    produto.getReferencia(),
+                    produto.getMarca(),
+                    produto.getCategoria(),
+                    produto.getPreco()
+                    });
+                }
             }
         }
-        tableModel = (DefaultTableModel) tableBuscaProdutos.getModel();
-        tableModel.setNumRows(0);
+        
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
     public void mostrarProdutoNovoNaTabela(Produto obj) {
