@@ -4,8 +4,11 @@
  */
 package uscs;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -165,7 +168,7 @@ public class EditarProduto extends javax.swing.JDialog {
         referenciaProdutoText.setText(produto.getReferencia());
         marcaProdutoText.setText(produto.getMarca());
         categoriaProdutoText.setText(produto.getCategoria());
-        precoProdutoText.setText(String.valueOf(produto.getPreco()));
+        precoProdutoText.setText(produtoController.formatarDoubleParaString(produto.getPreco()));
     }
     
     private void botãoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botãoSalvarActionPerformed
@@ -182,7 +185,7 @@ public class EditarProduto extends javax.swing.JDialog {
             produto.setReferencia(referenciaProdutoText.getText());
             produto.setMarca(marcaProdutoText.getText());
             produto.setCategoria(categoriaProdutoText.getText());
-            produto.setPreco(Double.parseDouble(precoProdutoText.getText()));
+            produto.setPreco(Double.parseDouble(produtoController.formatarStringParaPattern(precoProdutoText.getText())));
             System.out.println(produto);
             produtoListener.produtoCadastrado(produto);
             
@@ -190,7 +193,7 @@ public class EditarProduto extends javax.swing.JDialog {
         }
         catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, insira um valor numérico válido para o preço.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+        } 
         
         
     }//GEN-LAST:event_botãoSalvarActionPerformed

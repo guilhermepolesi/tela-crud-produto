@@ -166,7 +166,7 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
                 produto.getReferencia(),
                 produto.getMarca(),
                 produto.getCategoria(),
-                produto.getPreco()
+                produtoController.formatarDoubleParaString(produto.getPreco())
                 });
             }
         }
@@ -182,7 +182,7 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
                     produto.getReferencia(),
                     produto.getMarca(),
                     produto.getCategoria(),
-                    produto.getPreco()
+                    produtoController.formatarDoubleParaString(produto.getPreco())
                     });
                 }
             }
@@ -240,10 +240,6 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
         
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
-    public void mostrarProdutoNovoNaTabela(Produto obj) {
-        tableModel = (DefaultTableModel) tableBuscaProdutos.getModel();
-        tableModel.addRow(new Object[]{obj});
-    }
     
     private void editarLinhaSelecionada() {
         tableBuscaProdutos.addMouseListener(new MouseAdapter() {
@@ -331,7 +327,7 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
         produto.getReferencia(),
         produto.getMarca(),
         produto.getCategoria(),
-        produto.getPreco()
+        produtoController.formatarDoubleParaString(produto.getPreco())
         });
     }
 }

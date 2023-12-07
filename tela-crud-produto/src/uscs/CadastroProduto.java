@@ -4,8 +4,11 @@
  */
 package uscs;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -166,7 +169,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             produto.setReferencia(referenciaProdutoText.getText());
             produto.setMarca(marcaProdutoText.getText());
             produto.setCategoria(categoriaProdutoText.getText());
-            produto.setPreco(Double.parseDouble(precoProdutoText.getText()));
+            produto.setPreco(Double.parseDouble(produtoController.formatarStringParaPattern(precoProdutoText.getText())));
         
             produtoController.getList().add(produto);
             System.out.println(produto);
@@ -176,8 +179,11 @@ public class CadastroProduto extends javax.swing.JDialog {
         }
         catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, insira um valor numérico válido para o preço.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
+        } 
         
+        catch (IllegalArgumentException e) {
+            System.out.println("Erro");
+        }
         
     }//GEN-LAST:event_botãoSalvarActionPerformed
 

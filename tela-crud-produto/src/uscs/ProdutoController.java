@@ -4,8 +4,12 @@
  */
 package uscs;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -15,6 +19,10 @@ public class ProdutoController {
     
     private static ProdutoController instance;
     private List<Produto> productList;
+    private static final String DECIMAL_PATTERN = "#.##0,00";
+    
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("pt", "BR"));
+    NumberFormat numberFormat = NumberFormat.getInstance(new Locale("pt", "BR"));
 
     private ProdutoController() {
         productList = new ArrayList<>();
@@ -44,6 +52,19 @@ public class ProdutoController {
             }
         }
         return null;
+    }
+    
+    public String formatarDoubleParaString(double valor) {
+        numberFormat.setMinimumFractionDigits(2);
+        numberFormat.setMaximumFractionDigits(2);
+        String valorFormatado = numberFormat.format(valor);
+        return valorFormatado;
+    }
+    
+    public String formatarStringParaPattern(String s) {
+        DecimalFormat df = new DecimalFormat(DECIMAL_PATTERN, symbols);
+        df.format(s);
+        return s;
     }
     
 }
