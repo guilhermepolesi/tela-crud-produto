@@ -4,9 +4,12 @@
  */
 package uscs;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -24,6 +27,11 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
     
     public ProdutoView() {
         initComponents();
+        
+        tableBuscaProdutos.setRowSelectionAllowed(true);
+        tableBuscaProdutos.setEnabled(true);
+        editarLinhaSelecionada();
+        
     }
 
     /**
@@ -91,12 +99,16 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
             new String [] {
                 "Id", "Nome", "Referência", "Marca", "Categoria", "Preço"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tableBuscaProdutos);
-        if (tableBuscaProdutos.getColumnModel().getColumnCount() > 0) {
-            tableBuscaProdutos.getColumnModel().getColumn(2).setResizable(false);
-            tableBuscaProdutos.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,6 +244,33 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
         tableModel = (DefaultTableModel) tableBuscaProdutos.getModel();
         tableModel.addRow(new Object[]{obj});
     }
+    
+    private void editarLinhaSelecionada() {
+        tableBuscaProdutos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    int linhaSelecionada = tableBuscaProdutos.getSelectedRow();
+                    handleTableClick(linhaSelecionada);
+                }
+            }
+
+            private void handleTableClick(int linhaSelecionada) {
+               Object idObj = tableBuscaProdutos.getValueAt(linhaSelecionada, 0);
+            
+            if (idObj instanceof Integer) {
+                int idProduto = (int) idObj;
+                Produto produto = produtoController.obterProdutoPorId(idProduto);
+                
+                if (produto != null) {
+                    EditarProduto obj = new EditarProduto(ProdutoView.this, true, ProdutoView.this, produto);
+                    obj.setVisible(true);
+                }
+            }
+            }
+        });
+    }
+    
     
     
     /**

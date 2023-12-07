@@ -114,13 +114,13 @@ public class EditarProduto extends javax.swing.JDialog {
                                 .addComponent(marcaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(categoriaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGap(47, 47, 47)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(nomeProdutoText, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(referenciaProdutoText, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(marcaProdutoText, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(categoriaProdutoText, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(precoProdutoText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(categoriaProdutoText)
+                                .addComponent(precoProdutoText)
+                                .addComponent(nomeProdutoText, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(referenciaProdutoText)
+                                .addComponent(marcaProdutoText)))))
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,9 +150,9 @@ public class EditarProduto extends javax.swing.JDialog {
                     .addComponent(precoLabel)
                     .addComponent(precoProdutoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botãoSalvar)
-                    .addComponent(cancelarCadastro))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancelarCadastro)
+                    .addComponent(botãoSalvar))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
