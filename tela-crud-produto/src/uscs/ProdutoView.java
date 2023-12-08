@@ -22,6 +22,7 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
      */
     
     ProdutoController produtoController = ProdutoController.getInstance();
+    ProdutoPattern produtoPattern = new ProdutoPattern();
     
     DefaultTableModel tableModel;
     
@@ -166,7 +167,7 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
                 produto.getReferencia(),
                 produto.getMarca(),
                 produto.getCategoria(),
-                produtoController.formatarDoubleParaString(produto.getPreco())
+                produtoPattern.formatarDoubleParaString(produto.getPreco())
                 });
             }
         }
@@ -182,7 +183,7 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
                     produto.getReferencia(),
                     produto.getMarca(),
                     produto.getCategoria(),
-                    produtoController.formatarDoubleParaString(produto.getPreco())
+                    produtoPattern.formatarDoubleParaString(produto.getPreco())
                     });
                 }
             }
@@ -327,7 +328,7 @@ public class ProdutoView extends javax.swing.JFrame implements ProdutoListener{
         produto.getReferencia(),
         produto.getMarca(),
         produto.getCategoria(),
-        produtoController.formatarDoubleParaString(produto.getPreco())
+        produtoPattern.formatarDoubleParaString(produto.getPreco())
         });
     }
 }

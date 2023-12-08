@@ -21,6 +21,7 @@ public class EditarProduto extends javax.swing.JDialog {
     private static Produto produto;
     private ProdutoListener produtoListener;
     ProdutoController produtoController = ProdutoController.getInstance();
+    ProdutoPattern produtoPattern = new ProdutoPattern();
     
     
    public EditarProduto(java.awt.Frame parent, boolean modal, ProdutoListener produtoListener, Produto produto) {
@@ -168,7 +169,7 @@ public class EditarProduto extends javax.swing.JDialog {
         referenciaProdutoText.setText(produto.getReferencia());
         marcaProdutoText.setText(produto.getMarca());
         categoriaProdutoText.setText(produto.getCategoria());
-        precoProdutoText.setText(produtoController.formatarDoubleParaString(produto.getPreco()));
+        precoProdutoText.setText(produtoPattern.formatarDoubleParaString(produto.getPreco()));
     }
     
     private void botãoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botãoSalvarActionPerformed
@@ -185,13 +186,16 @@ public class EditarProduto extends javax.swing.JDialog {
             produto.setReferencia(referenciaProdutoText.getText());
             produto.setMarca(marcaProdutoText.getText());
             produto.setCategoria(categoriaProdutoText.getText());
-            produto.setPreco(Double.parseDouble(produtoController.formatarStringParaPattern(precoProdutoText.getText())));
+            produto.setPreco(produtoPattern.formatarStringParaPattern(precoProdutoText.getText()));
+
             System.out.println(produto);
             produtoListener.produtoCadastrado(produto);
             
             dispose();
         }
         catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira um valor numérico válido para o preço.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (ParseException ex) {
             JOptionPane.showMessageDialog(this, "Por favor, insira um valor numérico válido para o preço.", "Erro", JOptionPane.ERROR_MESSAGE);
         } 
         

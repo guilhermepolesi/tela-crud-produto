@@ -20,6 +20,7 @@ public class CadastroProduto extends javax.swing.JDialog {
 
     private ProdutoListener produtoListener;
     ProdutoController produtoController = ProdutoController.getInstance();
+    ProdutoPattern produtoPattern = new ProdutoPattern();
     
     
    public CadastroProduto(java.awt.Frame parent, boolean modal, ProdutoListener produtoListener) {
@@ -169,7 +170,8 @@ public class CadastroProduto extends javax.swing.JDialog {
             produto.setReferencia(referenciaProdutoText.getText());
             produto.setMarca(marcaProdutoText.getText());
             produto.setCategoria(categoriaProdutoText.getText());
-            produto.setPreco(Double.parseDouble(produtoController.formatarStringParaPattern(precoProdutoText.getText())));
+            produto.setPreco(produtoPattern.formatarStringParaPattern(precoProdutoText.getText()));
+
         
             produtoController.getList().add(produto);
             System.out.println(produto);
@@ -179,11 +181,11 @@ public class CadastroProduto extends javax.swing.JDialog {
         }
         catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, insira um valor numérico válido para o preço.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Por favor, insira um valor numérico válido para o preço.", "Erro", JOptionPane.ERROR_MESSAGE);
         } 
         
-        catch (IllegalArgumentException e) {
-            System.out.println("Erro");
-        }
+        
         
     }//GEN-LAST:event_botãoSalvarActionPerformed
 
